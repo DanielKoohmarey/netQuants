@@ -35,6 +35,10 @@ def get_all(symbol):
     data['price_sales_ratio'] = get_price_sales_ratio(symbol)
     data['price_book_ratio'] = get_price_book_ratio(symbol)
     data['short_ratio'] = get_short_ratio(symbol)
+    #Added for Round Numbers Strategy
+    data['close']=get_prev_close(symbol)
+    data['open']=get_open(symbol)
+    data['high']=get_high(symbol)
     return pd.Series(data)
 
 def get_all_rt(symbol):
@@ -100,6 +104,17 @@ def get_price_book_ratio(symbol):
        
 def get_short_ratio(symbol): 
     return float(__request(symbol, 's7'))
+
+#Further Symbols for Round Numbers Strategy
+
+def get_prev_close(symbol):
+    return float(__request(symbol, 'p'))
+
+def get_open(symbol):
+    return float(__request(symbol, 'o'))
+
+def get_high(symbol):
+    return float(__request(symbol, 'h'))
 
 # NEW PROPERTIES
 
@@ -167,7 +182,7 @@ def get_historical_prices(symbol, start_date, end_date):
           'f=%s&' % str(int(end_date[0:4])) + \
           'g=d&ignore=.csv'
 
-    return pd.read_csv(address, index_col = 0, parse_dates = True).sort()
+    return pd.read_csv(str(address), index_col = 0, parse_dates = True).sort()
 
 def dfTwoYearClose(symbol):
     df = get_historical_prices(symbol, '20100101', '20120101')
