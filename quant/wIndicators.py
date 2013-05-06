@@ -30,7 +30,6 @@ def roundNumbers(priceSeries, period = 5, mulFactor = 1, addFactor = 0):
     frame['signal'][0:(period-1)] = 0
 
     return frame['signal']
-<<<<<<< HEAD
 
 lastOpen = 0.0
 def roundNumbers(priceSeries,stock = 'goog'):
@@ -61,8 +60,7 @@ def round_stock(x):
 		return round(x,-2)-50
 	else:
 		return round(x,-2)+50
-=======
->>>>>>> 732e452f960bbb11686e96834d43562b6e8b44c9
+
 
 def maCrossover(priceSeries, period = 3):
     return 0
